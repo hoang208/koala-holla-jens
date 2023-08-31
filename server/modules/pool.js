@@ -21,7 +21,9 @@ else {
     pool = new pg.Pool({
         host: 'localhost',
         port: 5432,
-        database: '', 
+        database: 'koala_pool', 
+        //database is called koala_pool 
+        //but the table is titled koalas_info
     });
 }
 

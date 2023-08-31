@@ -1,7 +1,10 @@
 CREATE TABLE "koalas_info" (
 	"id" SERIAL PRIMARY KEY,
-	"title" VARCHAR (250) NOT NULL,
-	"author" VARCHAR (100) NOT NULL,
-	"published" DATE,
-  "isRead" BOOLEAN DEFAULT FALSE
+	"Name" VARCHAR (250) NOT NULL,
+	"Age" INTEGER NOT NULL,
+	"Gender" VARCHAR (1) NOT NULL,
+    "Transfer Status" BOOLEAN DEFAULT FALSE,
+    "Notes" VARCHAR (250) NOT NULL
 );
+
+
