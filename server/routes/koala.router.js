@@ -1,9 +1,9 @@
 const express = require('express');
 const koalaRouter = express.Router();
-
+const pool = require('../Modules/pool.js');
 // DB CONNECTION
 
-
+// modules/pool.js
 // GET
 koalaRouter.get('/', (req, res) => {
     let queryText = 'SELECT * FROM "koalas_info" ORDER BY "name";';
