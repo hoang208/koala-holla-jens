@@ -1,6 +1,6 @@
 const express = require('express');
 const koalaRouter = express.Router();
-const pool = require('../modules/pool.js');
+const pool = require('../Modules/pool.js');
 // DB CONNECTION
 
 // modules/pool.js
