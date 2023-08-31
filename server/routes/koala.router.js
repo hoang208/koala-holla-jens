@@ -33,8 +33,37 @@ koalaRouter.post('/',  (req, res) => {
   });
 
 // PUT
+koalaRouter.put('/koala_Pool/:id', (req, res) => {
+   
 
+    let idToUpdate = req.params.id;
+    let newKoala = req.body.artist;
 
-// DELETE
+    console.log('idToUpdate:', idToUpdate);
+    console.log(':', );
+
+    console.log('typeof newKoala:', typeof newKoala);
+  
+    let mySqlQuery = `
+    UPDATE "" SET "" = $1 WHERE id = $2;
+    `;
+
+    pool.query(mySqlQuery, [, idToUpdate])
+    
+        .then(
+            (response) => {
+                console.log("Update request successful", idToUpdate);
+                res.sendStatus(200);
+            }
+        )
+        .catch(
+            (err) => {
+                console.log(`Update request failed: ${idToUpdate}`, err);
+                res.sendStatus(500);
+            }
+        )
+})
 
 module.exports = koalaRouter;
+// DELETE
+
