@@ -7,4 +7,6 @@ CREATE TABLE "koalas_info" (
     "Notes" VARCHAR (250) NOT NULL
 );
 
-
+INSERT INTO "koalas_info" ("Name","Age","Gender","Transfer Status", "Notes")
+VALUES ('Bramble', 10, 'M', 'Yes', 'A burly lil guy'),
+('Clover',8 , 'F', 'No', 'the luckiest little clover')
