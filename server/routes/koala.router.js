@@ -64,7 +64,6 @@ koalaRouter.put('/koala_Pool/:id', (req, res) => {
         )
 })
 
-
+module.exports = koalaRouter;
 // DELETE
 
-module.exports = koalaRouter;
