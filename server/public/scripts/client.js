@@ -52,11 +52,11 @@ function renderKoalas(koalas){
   for(let koala of koalas) {
     let $newRow=$(`
     <tr>
-      <td>${koalas.name}</td>
-      <td>${koalas.age}</td>
-      <td>${koalas.gender}</td>
-      <td>${koalas.readyForTransfer}</td>
-      <td>${koalas.notes}</td>
+      <td>${koala.name}</td>
+      <td>${koala.age}</td>
+      <td>${koala.gender}</td>
+      <td>${koala.readyForTransfer}</td>
+      <td>${koala.notes}</td>
     </tr>
     `);
     $newRow.data('id', koalas.id);
