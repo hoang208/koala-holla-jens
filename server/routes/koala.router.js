@@ -20,7 +20,7 @@ koalaRouter.post('/',  (req, res) => {
     let newKoala = req.body;
     console.log(`Adding koala`, newKoala);
   
-    let queryText = `INSERT INTO "koalas_info" ("Name", "Age", "Gender","Tranfer Status","Notes")
+    let queryText = `INSERT INTO "koalas_info" ("Name", "Age", "Gender","Transfer Status","Notes")
                      VALUES ($1, $2, $3, $4, $5);`;
     pool.query(queryText, [newKoala.name, newKoala.age, newKoala.gender, newKoala.readyForTransfer, newKoala.notes])
       .then(result => {
