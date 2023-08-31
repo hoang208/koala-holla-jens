@@ -22,8 +22,14 @@ function setupClickListeners() {
       readyForTransfer: $('#readyForTransferIn').val(),
       notes: $('#notesIn').val(),
     };
-    // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
+    console.log(koalaToSend);
+    // call saveKoala with the new object
+    $('#nameIn').val(''),
+    $('#ageIn').val(''),
+    $('#genderIn').val(''),
+    $('#readyForTransferIn').val(''),
+    $('#notesIn').val(''),
+    saveKoala(koalaToSend);
   }); 
 }
 
@@ -35,13 +41,13 @@ function getKoalas(){
     url: '/koalas'
   }).then(function(response) {
     console.log(response);
-    renderKoalas();
+    renderKoalas(response);
   }).catch(function(error){
     console.log('error in GET', error);
   });
 } // end getKoalas
 
-function saveKoala( newKoala ){
+function saveKoala(newKoala){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
   $.ajax({
@@ -59,14 +65,17 @@ function saveKoala( newKoala ){
 
 function renderKoalas(koalas){
   $('#viewKoalas').empty();
-  for(let koala of koalas) {
+  for(let koala of koalas){
+  // for (let i = 0; i <koalas.length; i++) {
+  //   let koala = koalas[i];
+      console.log(koala)
     let $newRow=$(`
     <tr>
-      <td>${koala.name}</td>
-      <td>${koala.age}</td>
-      <td>${koala.gender}</td>
-      <td>${koala.readyForTransfer}</td>
-      <td>${koala.notes}</td>
+      <td>${koala.Name}</td>
+      <td>${koala.Age}</td>
+      <td>${koala.Gender}</td>
+      <td>${koala.Transfer_Status}</td>
+      <td>${koala.Notes}</td>
     </tr>
     `);
     $newRow.data('id', koalas.id);
