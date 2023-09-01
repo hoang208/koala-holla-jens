@@ -6,7 +6,16 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
+  $(".transferStatus").each(function() {
+    const status = $(this).text();
+    const update = $(this).next().next().find('.updateBtn');
+    if (status == "true") {
+      update.hide()
+    } else {
+      update.show()
+    }
+  });
+  $('#viewKoalas').on('click', '.updateBtn', updateKoala)
 }); // end doc ready
 
 function setupClickListeners() {
@@ -74,12 +83,49 @@ function renderKoalas(koalas){
       <td>${koala.Name}</td>
       <td>${koala.Age}</td>
       <td>${koala.Gender}</td>
-      <td>${koala.Transfer_Status}</td>
+      <td class="transferStatus">${koala.Transfer_Status}</td>
       <td>${koala.Notes}</td>
-      <td><button id="updateBtn">Ready for Transfer</button></td>
+      <td><button class="updateBtn">Ready for Transfer</button></td>
     </tr>
     `);
-    $newRow.data('id', koalas.id);
+    $newRow.data('id', koala.id);
     $('#viewKoalas').append($newRow);
+    // if (koala.Transfer_Status === 'true' || koala.Transfer_Status === "True") {
+    //  console.log('Is this Koala transfer status working?', koala.Transfer_Status);
+     
+    //   $newRow.find('.updateBtn').remove('button');
+    // }
   }
+  //   } else {
+  //     $newRow.find('.updateBtn').show();}
+  // }
+  
 };
+
+function updateKoala() {
+  let idToUpdate = $(this).parent().parent().data('id');
+
+  console.log("idToUpdate:", idToUpdate);
+  console.log($(this).parent().parent().find('.transferStatus').text());
+  let transferStatusUpdateObject = {
+      Transfer_Status: $(this).parent().parent().find('.transferStatus').text(),
+  }
+//FIX BELOW FOR THE LOVE OF THE KOALAS
+
+  
+  $.ajax({
+      method: 'PUT',
+      url: `/koalas/koala_Pool/${idToUpdate}`,
+      data: transferStatusUpdateObject
+  }).then(
+      (response) => {
+          console.log("update koalas worked, koala id:", idToUpdate);
+          getKoalas();
+      }
+  ).catch(
+      (error) => {
+          alert('Error on updating koalas:', error);
+      }
+  )
+}
+

@@ -44,14 +44,18 @@ koalaRouter.put('/koala_Pool/:id', (req, res) => {
 
     console.log('idToUpdate:', idToUpdate);
     console.log(':', );
-
+    console.log('newKoala is',newKoala)
     console.log('typeof newKoala:', typeof newKoala);
   
+    if (newKoala === 'false' || newKoala === 'False'){
+      newKoala = 'True'
+    };
+
     let mySqlQuery = `
-    UPDATE "koalas_info" SET "Transfer Status" = $1 WHERE id = $2;
+    UPDATE "koalas_info" SET "Transfer_Status" = $1 WHERE id = $2;
     `;
 
-    pool.query(mySqlQuery, [newKoala.Transfer_Status, idToUpdate])
+    pool.query(mySqlQuery, [newKoala, idToUpdate])
     
         .then(
             (response) => {
