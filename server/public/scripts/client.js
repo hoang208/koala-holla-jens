@@ -6,15 +6,7 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-  $(".transferStatus").each(function() {
-    const status = $(this).text();
-    const update = $(this).next().next().find('.updateBtn');
-    if (status == "true") {
-      update.hide()
-    } else {
-      update.show()
-    }
-  });
+
   $('#viewKoalas').on('click', '.updateBtn', updateKoala)
 }); // end doc ready
 
@@ -90,11 +82,11 @@ function renderKoalas(koalas){
     `);
     $newRow.data('id', koala.id);
     $('#viewKoalas').append($newRow);
-    // if (koala.Transfer_Status === 'true' || koala.Transfer_Status === "True") {
-    //  console.log('Is this Koala transfer status working?', koala.Transfer_Status);
-     
-    //   $newRow.find('.updateBtn').remove('button');
-    // }
+         console.log('Is this koala.Transfer_Status status working?', koala.Transfer_Status);
+         console.log('Is this koala.Transfer_Status(typeOf) status working?', typeof koala.Transfer_Status);
+    if (koala.Transfer_Status == true) {
+      $newRow.find('.updateBtn').remove('button');
+    }
   }
   //   } else {
   //     $newRow.find('.updateBtn').show();}
@@ -110,7 +102,6 @@ function updateKoala() {
   let transferStatusUpdateObject = {
       Transfer_Status: $(this).parent().parent().find('.transferStatus').text(),
   }
-//FIX BELOW FOR THE LOVE OF THE KOALAS
 
   
   $.ajax({
