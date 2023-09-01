@@ -7,6 +7,7 @@ $( document ).ready( function(){
   // load existing koalas on page load
   getKoalas();
 
+  $('#viewKoalas').on('click', '.updateBtn', updateKoala)
 }); // end doc ready
 
 function setupClickListeners() {
@@ -74,12 +75,48 @@ function renderKoalas(koalas){
       <td>${koala.Name}</td>
       <td>${koala.Age}</td>
       <td>${koala.Gender}</td>
-      <td>${koala.Transfer_Status}</td>
+      <td class="transferStatus">${koala.Transfer_Status}</td>
       <td>${koala.Notes}</td>
-      <td><button id="updateBtn">Ready for Transfer</button></td>
+      <td><button class="updateBtn">Ready for Transfer</button></td>
     </tr>
     `);
-    $newRow.data('id', koalas.id);
+    $newRow.data('id', koala.id);
     $('#viewKoalas').append($newRow);
+         console.log('Is this koala.Transfer_Status status working?', koala.Transfer_Status);
+         console.log('Is this koala.Transfer_Status(typeOf) status working?', typeof koala.Transfer_Status);
+    if (koala.Transfer_Status == true) {
+      $newRow.find('.updateBtn').remove('button');
+    }
   }
+  //   } else {
+  //     $newRow.find('.updateBtn').show();}
+  // }
+  
 };
+
+function updateKoala() {
+  let idToUpdate = $(this).parent().parent().data('id');
+
+  console.log("idToUpdate:", idToUpdate);
+  console.log($(this).parent().parent().find('.transferStatus').text());
+  let transferStatusUpdateObject = {
+      Transfer_Status: $(this).parent().parent().find('.transferStatus').text(),
+  }
+
+  
+  $.ajax({
+      method: 'PUT',
+      url: `/koalas/koala_Pool/${idToUpdate}`,
+      data: transferStatusUpdateObject
+  }).then(
+      (response) => {
+          console.log("update koalas worked, koala id:", idToUpdate);
+          getKoalas();
+      }
+  ).catch(
+      (error) => {
+          alert('Error on updating koalas:', error);
+      }
+  )
+}
+
