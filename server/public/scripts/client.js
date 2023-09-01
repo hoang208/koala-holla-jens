@@ -16,11 +16,11 @@ function setupClickListeners() {
     // NOT WORKING YET :(
     // using a test object
     let koalaToSend = {
-      name: $('#nameIn').val(),
-      age: $('#ageIn').val(),
-      gender: $('#genderIn').val(),
-      readyForTransfer: $('#readyForTransferIn').val(),
-      notes: $('#notesIn').val(),
+      Name: $('#nameIn').val(),
+      Age: $('#ageIn').val(),
+      Gender: $('#genderIn').val(),
+      Transfer_Status: $('#readyForTransferIn').val(),
+      Notes: $('#notesIn').val(),
     };
     console.log(koalaToSend);
     // call saveKoala with the new object
@@ -76,6 +76,7 @@ function renderKoalas(koalas){
       <td>${koala.Gender}</td>
       <td>${koala.Transfer_Status}</td>
       <td>${koala.Notes}</td>
+      <td><button id="updateBtn">Ready for Transfer</button></td>
     </tr>
     `);
     $newRow.data('id', koalas.id);
